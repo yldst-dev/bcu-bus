@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>백석대학교 버스 출발정보</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.6s ease-out',
+            'slide-up': 'slideUp 0.5s ease-out',
+            'pulse-subtle': 'pulseSubtle 2s infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(10px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            pulseSubtle: {
+              '0%, 100%': { opacity: '1' },
+              '50%': { opacity: '0.7' },
+            },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+    body { font-family: 'Pretendard', sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+  <div class="w-full max-w-md animate-fade-in">
+    <h1 class="text-center text-3xl font-light text-gray-800 mb-6">백석대학교 버스 출발정보</h1>
+    
+    <!-- 메인 카드 -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
+      <!-- 현재 시간 섹션 -->
+      <div class="p-6 animate-slide-up">
+        <div class="flex justify-between items-center">
+          <span class="text-sm font-medium text-gray-500">현재 시간</span>
+          <div class="flex items-end space-x-2">
+            <span class="text-3xl font-bold text-gray-800">오전 06:10</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 구분선 -->
+      <div class="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+      
+      <!-- 다음 버스 섹션 -->
+      <div class="p-6 animate-slide-up" style="animation-delay: 100ms;">
+        <div class="flex justify-between items-center">
+          <span class="text-sm font-medium text-gray-500">다음 버스</span>
+          <div class="flex items-center space-x-3">
+            <div class="px-3 py-1 rounded-full bg-green-100 text-green-800 font-medium text-sm transition-all duration-300 hover:bg-green-200">
+              0분 후
+            </div>
+            <span class="text-3xl font-bold text-gray-800">오전 06:10</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 디버깅 모드 -->
+    <div class="mt-6 bg-white rounded-xl p-4 shadow-md animate-slide-up" style="animation-delay: 200ms;">
+      <div class="flex items-center mb-4">
+        <div class="relative inline-block w-10 mr-2 align-middle select-none">
+          <input type="checkbox" checked id="debug-toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-gray-300 appearance-none cursor-pointer transition-transform duration-200 ease-in-out translate-x-0 checked:translate-x-4 checked:border-blue-500 focus:outline-none">
+          <label for="debug-toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+        </div>
+        <label for="debug-toggle" class="text-sm font-medium text-gray-700">디버깅 모드</label>
+      </div>
+      
+      <div class="mb-4">
+        <div class="relative">
+          <input type="text" value="오전 06:10" class="w-full py-3 px-4 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
+          <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 시간표 버튼 -->
+    <button class="mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white py-4 px-6 rounded-xl font-medium transition-all duration-200 shadow hover:shadow-lg animate-slide-up flex items-center justify-center" style="animation-delay: 300ms;">
+      <span>전체 시간표 보기</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+    </button>
+    
+    <!-- 하단 정보 -->
+    <div class="mt-8 text-center text-xs text-gray-500 animate-slide-up" style="animation-delay: 400ms;">
+      <p>백석대학교 버스 시간표 정보는 실시간으로 업데이트됩니다.</p>
+      <p class="mt-1">문의: 학생지원처 041-123-4567</p>
+    </div>
+  </div>
+  
+  <style>
+    .toggle-checkbox:checked {
+      right: 0;
+      border-color: #4F46E5;
+    }
+    .toggle-checkbox:checked + .toggle-label {
+      background-color: #818CF8;
+    }
+  </style>
+</body>
+</html>
