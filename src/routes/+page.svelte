@@ -19,17 +19,31 @@
     setFavicon();
   }
 
-  // 버스 출발 시간 리스트
-  const schedule = [
-    "06:10", "06:23", "06:36", "06:49", "07:02", "07:15", "07:27", "07:39", "07:51", "08:03",
-    "08:15", "08:27", "08:39", "08:51", "09:03", "09:15", "09:27", "09:39", "09:51", "10:03",
-    "10:15", "10:27", "10:39", "10:51", "11:03", "11:15", "11:28", "11:41", "11:54", "12:07",
-    "12:20", "12:33", "12:46", "12:59", "13:13", "13:27", "13:41", "13:55", "14:09", "14:23",
-    "14:37", "14:51", "15:05", "15:19", "15:33", "15:47", "16:01", "16:15", "16:29", "16:43",
-    "16:56", "17:09", "17:22", "17:35", "17:48", "18:01", "18:14", "18:27", "18:39", "18:51",
-    "19:03", "19:15", "19:27", "19:39", "19:51", "20:03", "20:15", "20:27", "20:39", "20:51",
-    "21:05", "21:20", "21:35", "21:55", "22:15"
-  ];
+  // 버스 출발 시간표(14번, 700번)
+  const schedules = {
+    '14': [
+      "06:10", "06:30", "06:45", "07:00", "07:15", "07:26", "07:37",
+      "07:48", "07:59", "08:10", "08:21", "08:32", "08:43", "08:54",
+      "09:05", "09:16", "09:27", "09:38", "09:49", "10:00", "10:11",
+      "10:22", "10:34", "10:46", "10:58", "11:10", "11:22",
+      "11:35", "11:48", "12:01", "12:14", "12:27", "12:40",
+      "12:54", "13:08", "13:22", "13:36", "13:50", "14:04",
+      "14:18", "14:32", "14:46", "15:00", "15:14", "15:28",
+      "15:42", "15:56", "16:10", "16:24", "16:37", "16:50",
+      "17:03", "17:16", "17:29", "17:42", "17:55", "18:08",
+      "18:20", "18:32", "18:44", "18:56", "19:08", "19:20",
+      "19:32", "19:44", "19:57", "20:10", "20:23", "20:36",
+      "20:50", "21:04", "21:18", "21:32", "21:46", "22:00",
+      "22:15"
+    ],
+    '700': [
+      "06:00", "06:26", "06:52", "07:44", "08:10", "08:36", "09:02", "09:28", "10:20", "10:46",
+      "11:38", "12:31", "13:28", "13:54", "14:20", "15:12", "15:38", "16:04", "16:56", "17:48",
+      "18:14", "18:40", "19:40", "20:10", "20:40", "21:10", "21:40"
+    ]
+  };
+  let selectedRoute = '14';
+  $: schedule = schedules[selectedRoute];
 
   function getKoreaTime() {
     return new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Seoul" }));
@@ -146,6 +160,21 @@
 <main class="min-h-screen bg-gray-50 flex items-center justify-center p-4">
   <div class="w-full max-w-md animate-fade-in">
     <h1 class="text-center text-3xl font-light text-gray-800 mb-6">백석대학교 버스 출발정보</h1>
+    <!-- 노선 스위치 버튼 -->
+    <div class="flex justify-center mb-4">
+      <button
+        class="px-5 py-2 rounded-l-full border border-blue-500 font-semibold transition-all duration-150 focus:outline-none
+        {selectedRoute === '14' ? 'bg-blue-500 text-white shadow-lg border-2 border-blue-700 z-10' : 'text-blue-700 bg-white hover:bg-blue-50'}"
+        style="min-width: 80px;"
+        on:click={() => selectedRoute = '14'}
+      >14번</button>
+      <button
+        class="px-5 py-2 rounded-r-full border border-blue-500 font-semibold transition-all duration-150 focus:outline-none
+        {selectedRoute === '700' ? 'bg-blue-500 text-white shadow-lg border-2 border-blue-700 z-10' : 'text-blue-700 bg-white hover:bg-blue-50'}"
+        style="min-width: 80px;"
+        on:click={() => selectedRoute = '700'}
+      >700번</button>
+    </div>
     
     <!-- 메인 카드 -->
     <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
